@@ -1,0 +1,169 @@
+<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+        
+              <div class="navbar-header">
+                <a class="navbar-brand">Hotel Management System</a>
+                <button type="button" class="navbar-toggle" data-target="#navbarCollapse" data-toggle="collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              </div>
+              <div class="navbar-collapse collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav">
+                  <li class="active">
+                    <a>Home</a></li>
+                  <li><a (click)="bookMove()">Book</a></li>
+                  <li><a (click)="cancelMove()">Cancel Booking</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                  <input class="btn btn-success" type="button" (click)="login()" value="Log Out"></form>
+              </div>
+            </div>
+          </nav>
+       
+        <img src="./assets/data/hotel.jpg" alt="No image" class="bg">
+        <!-- <mat-form-field class="example-full-width check">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+      <br><br><br><br><br><br>
+     
+      <!-- <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </form> -->
+          
+          <!-- <hr/>
+          <pre>Model: {{ model | json }}</pre> -->
+        
+          <!-- <div class="row">
+                <div class="col-xs-12 col-12 col-md-4 form-group">
+                  <input type="text"
+                         placeholder="Datepicker"
+                         class="form-control"
+                         bsDatepicker>
+                </div>
+               
+              </div> -->
+        <div *ngIf="!flag3&&!flag4">
+           
+            <div class="container">
+                <form #trainerForm="ngForm">
+                    <div class="form-group">
+                        <label>Enter checkin Date</label>
+                        <input #cd="ngModel" type="text" required [class.is-invalid]="cd.invalid && cd.touched"
+                            class="form-control" placeholder="Enter Your Check In Date " name="trainerId" [(ngModel)]="cin" />
+                        <div *ngIf="cd.errors && (cd.invalid || cd.touched)">
+                            <small class="text-danger" *ngIf="cd.errors.required && cd.touched">Check In Date is
+                                Required</small>
+                            <!-- <small class="text-danger" *ngIf="cd.errors.pattern" >Employee Id Should not start with zero and max length is 5</small> -->
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label>Enter check Out Date</label>
+                        <input #cod="ngModel" type="text" required [class.is-invalid]="cod.invalid && cod.touched"
+                            class="form-control" placeholder="Enter Your Check Out Date " name="skill"
+                            [(ngModel)]="cout" />
+                        <div *ngIf="cod.errors && (cod.invalid || cod.touched)">
+                            <small class="text-danger" *ngIf="cod.errors.required && cod.touched">Check Out Date is
+                                Required</small>
+                            <!-- <small class="text-danger" *ngIf="cd.errors.pattern" >Employee Id Should not start with zero and max length is 5</small> -->
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                            <label>Choose Number Of Persons</label>
+                        <select #np="ngModel" class="form-control" name="opt" [(ngModel)]="nperson"><option selected>Choose Number Of Persons</option>
+                         <option  *ngFor="let item of topics">{{item}}</option></select>
+                         <!-- <small  class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please choose correct value</small> -->
+ 
+                     </div>
+                     <div class="form-group">
+                            <label>Choose Type of Room</label>
+                        <select  #tr="ngModel"  class="form-control" name="roomty" [(ngModel)]="room"><option selected>Choose Type of Room</option>
+                         <option  *ngFor="let item of type">{{item}}</option></select>
+                         <!-- <small  class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please choose correct value</small> -->
+ 
+                     </div>
+
+                    
+                    
+
+                    <button class="btn btn-primary" [disabled]="cd.invalid||cod.invalid||np.invalid||tr.invalid" (click)="addbook()">Submit</button>
+
+                </form>
+                
+              
+            </div>
+
+
+
+
+
+        </div>
+        <div class="bookstyle" *ngIf="flag3">
+                <div class="jumbotron">
+                    <div class="container-fluid">
+                    <h1>
+
+                            {{message}}
+                    </h1>
+                </div>
+            </div></div>
+            <div class="bookstyle" *ngIf="flag4">
+                <div class="jumbotron">
+                    <div class="container-fluid">
+                    <h1>
+                    Room Already Booked!!
+                    </h1>
+                </div>
+            </div></div>
+
+            <!-- <mat-form-field class="example-full-width">
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
+                  <!-- <mbsc-form input-style="box" label-style="stacked">
+                        <div class="mbsc-grid">
+                            <mbsc-form-group>
+                                <mbsc-form-group-title>Pick a date</mbsc-form-group-title>
+                                <div class="mbsc-row mbsc-form-grid">
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6 mbsc-col-xl-3">
+                                        <mbsc-calendar [(ngModel)]="six" [options]="sixSettings">Next 6 months</mbsc-calendar>
+                                    </div>
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6 mbsc-col-xl-3">
+                                        <mbsc-calendar [(ngModel)]="future" [options]="futureSettings">Future dates</mbsc-calendar>
+                                    </div>
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6 mbsc-col-xl-3">
+                                        <mbsc-calendar [(ngModel)]="past" [options]="pastSettings">Past dates</mbsc-calendar>
+                                    </div>
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6 mbsc-col-xl-3">
+                                        <mbsc-calendar [(ngModel)]="time" [options]="timeSettings">With time</mbsc-calendar>
+                                    </div>
+                                </div> -->
+                            <!-- </mbsc-form-group>
+                            <mbsc-form-group>
+                                <mbsc-form-group-title>Date formats</mbsc-form-group-title>
+                                <div class="mbsc-row mbsc-form-grid">
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                                        <mbsc-calendar [(ngModel)]="dateStr" [options]="dateStrSettings">String</mbsc-calendar>
+                                    </div>
+                                    <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                                        <mbsc-calendar [(ngModel)]="moment" [options]="momentSettings">Moment JS</mbsc-calendar>
+                                    </div>
+                                </div>
+                            </mbsc-form-group>
+                        </div>
+                    </mbsc-form> -->
